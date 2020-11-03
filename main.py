@@ -23,7 +23,7 @@ class LanguageType(Enum):
     #hämta grejer från lowlight lista
 
 
-def pushSnippet(snippet:str, language:LanguageType):
+def push_snippet(snippet:str, language:LanguageType):
     content = {
         "snippet": snippet,
         "language": language.value}
@@ -34,5 +34,5 @@ def pushSnippet(snippet:str, language:LanguageType):
 def list_snippets(language:LanguageType):
     return(list(collection.find({'language': language.value})))
 
-pushSnippet("def alve2()", LanguageType.PYTHON)
+push_snippet("def alve2()", LanguageType.PYTHON)
 pprint.pprint(list_snippets(LanguageType.JAVASCRIPT))
