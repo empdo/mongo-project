@@ -1,0 +1,7 @@
+[Unit]
+Description=SSH key agent
+After=network.target
+WantedBy=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/typeracer/dev/mongo-project/flask_server.py
