@@ -6,7 +6,7 @@ import pprint
 
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017/')
 
-db = client['snippets-database']
+db = client['test']
 
 collection = db.snippets
 
@@ -32,9 +32,9 @@ def push_snippet(snippet:str, language:LanguageType):
     
 
 def list_snippets(language:LanguageType, list_all:bool):
-    if (list_all):
+    if list_all:
         cursor = collection.find()
-        return [({"lang": item["language"], "snippet": item["snippet"]} for item in cursor)]
+        return [{"lang": item["language"], "snippet": item["snippet"]} for item in cursor]
     else:
         return((collection.find({'language': language.value}).distinct('snippet')))
 
