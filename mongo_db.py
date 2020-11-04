@@ -31,8 +31,13 @@ def push_snippet(snippet:str, language:LanguageType):
     collection.insert_one(content)
     
 
-def list_snippets(language:LanguageType):
-    return(list(collection.find({'language': language.value})))
+def list_snippets(language:LanguageType, list_all:bool):
+    if (list_all):
+        cursor = collection.find()
+        return [({"lang": item["language"], "snippet": item["snippet"]} for item in cursor)]
+    else:
+        return((collection.find({'language': language.value}).distinct('snippet')))
 
-push_snippet("def alve2()", LanguageType.PYTHON)
-pprint.pprint(list_snippets(LanguageType.JAVASCRIPT))
+def list_languages():
+    return(collection.distinct('language'))
+    
