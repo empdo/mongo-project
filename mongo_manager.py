@@ -2,6 +2,7 @@ import argparse
 from argparse import ArgumentParser
 import mongo_db
 from mongo_db import push_snippet
+from termcolor import colored
 
 content = []
 
@@ -13,15 +14,15 @@ def handel_snippet(path: str, lang: str):
             for line in f:
                 content.append(line.strip())
         mongo_db.push_snippet(path, lang)
-    except FileNotFoundError as e:
-        print(e)
+    except FileNotFoundError:
+        print(colored("not a valid path", 'red'))
     except:
-        print("Unexpected error")
+        print(colored("Unexpected error", 'red'))
 
 
 
 def print_snippets(lang: str):
-    print(lang)
+    print(mongo_db.list_snippets(lang))
 
 
 parser = argparse.ArgumentParser(prog='mongo_manager',
