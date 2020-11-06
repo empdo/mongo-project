@@ -7,18 +7,19 @@ from termcolor import colored
 content = []
 
 
-def handel_snippet(path: str, lang: str):
-    try:    
+def handel_snippet(path: str, lang: mongo_db.LanguageType):
+    try:
         with open(path, 'r') as f:
-            i = 0
             for line in f:
-                content.append(line.strip())
-        mongo_db.push_snippet(path, lang)
+                mongo_db.push_snippet(line.strip(), lang) 
+
+            #spara det man senast pushade up för att kunna ta bort det
+
+            print(colored("snippets pushed succesfully", 'green'))
     except FileNotFoundError:
-        print(colored("not a valid path", 'red'))
+        print(colored(f'not a valid path: "{path}"', 'red'))
     except:
         print(colored("Unexpected error", 'red'))
-
 
 
 def print_snippets(lang: str):
@@ -35,19 +36,14 @@ group.add_argument('-p', '--push', type=str,
                    metavar='', help='add path of file to be pushed as snippets')
 group.add_argument('-lss', '--list_snippets', type=str,
                    metavar='', help='list snippets')
-parser.add_argument('-lang', type=str,
+parser.add_argument('-lang', type=mongo_db.LanguageType,
                     metavar='', help='language for earlier command')
 
 args = parser.parse_args()
 
 
 if __name__ == "__main__":
-    for x in mongo_db.LanguageType:
-        if x.value in args.lang:
-            if args.push:
-                handel_snippet(args.push, args.lang)
-            elif args.list_snippets:
-                print_snippets(args.lang)
-        else:
-            print("Not a valid language, please try again")
-            #return to help page
+    if args.push:
+        handel_snippet(args.push, args.lang)
+    elif args.list_snippets:
+        print_snippets(args.lang)

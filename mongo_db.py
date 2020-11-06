@@ -25,6 +25,9 @@ class LanguageType(Enum):
 
 
 def push_snippet(snippet: str, language: LanguageType):
+    if snippet == '':
+        return
+    
     content = {
         "snippet": snippet,
         "language": language.value
