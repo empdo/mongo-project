@@ -33,7 +33,7 @@ parser = argparse.ArgumentParser(prog='mongo_manager',
                                  )
 group = parser.add_mutually_exclusive_group()
 group.add_argument('-p', '--push', type=str,
-                   metavar='', help='add path of file to be pushed as snippets')
+                   metavar='', help='add path of file to be pushed after "-p"')
 group.add_argument('-lss', '--list_snippets', type=str,
                    metavar='', help='list snippets')
 parser.add_argument('-lang', type=mongo_db.LanguageType,
