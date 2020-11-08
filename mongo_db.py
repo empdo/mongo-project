@@ -45,10 +45,10 @@ def list_snippets(language: Union[LanguageType, None, str]):
             if language else {}
     )
 
-    return pprint.pprint([
+    return [
         {"lang": item["language"], "snippet": item["snippet"]} \
             for item in cursor
-    ])
+    ]
 
 
 def list_languages():

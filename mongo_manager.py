@@ -1,8 +1,7 @@
 import argparse
-from argparse import ArgumentParser
 import mongo_db
-from mongo_db import push_snippet
 from termcolor import colored
+import json
 
 content = []
 
@@ -23,7 +22,7 @@ def handel_snippet(path: str, lang: mongo_db.LanguageType):
 
 
 def print_snippets(lang: str):
-    print(mongo_db.list_snippets(lang))
+    print(json.dumps(mongo_db.list_snippets(lang)))
 
 
 parser = argparse.ArgumentParser(prog='mongo_manager',
@@ -34,8 +33,7 @@ parser = argparse.ArgumentParser(prog='mongo_manager',
 group = parser.add_mutually_exclusive_group()
 group.add_argument('-p', '--push', type=str,
                    metavar='', help='add path of file to be pushed after "-p"')
-group.add_argument('-lss', '--list_snippets', type=str,
-                   metavar='', help='list snippets')
+group.add_argument('-lss', '--list_snippets', help='list snippets', action="store_true")
 parser.add_argument('-lang', type=mongo_db.LanguageType,
                     metavar='', help='language for earlier command')
 
