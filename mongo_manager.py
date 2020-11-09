@@ -10,9 +10,9 @@ def handel_snippet(path: str, lang: mongo_db.LanguageType):
     try:
         with open(path, 'r') as f:
             for line in f:
-                mongo_db.push_snippet(line.strip(), lang) 
+                mongo_db.push_snippet(line.strip(), lang)
 
-            #spara det man senast pushade up för att kunna ta bort det
+            # spara det man senast pushade up för att kunna ta bort det
 
             print(colored("snippets pushed succesfully", 'green'))
     except FileNotFoundError:
@@ -33,7 +33,8 @@ parser = argparse.ArgumentParser(prog='mongo_manager',
 group = parser.add_mutually_exclusive_group()
 group.add_argument('-p', '--push', type=str,
                    metavar='', help='add path of file to be pushed after "-p"')
-group.add_argument('-lss', '--list_snippets', help='list snippets', action="store_true")
+group.add_argument('-lss', '--list_snippets',
+                   help='list snippets', action="store_true")
 parser.add_argument('-lang', type=mongo_db.LanguageType,
                     metavar='', help='language for earlier command')
 
