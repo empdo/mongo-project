@@ -24,6 +24,5 @@ def get_snippets(lang: str = None):
 def get_langs():
     return Response(json.dumps(mongo_db.list_languages()), mimetype='application/json')
 
-
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True)
+    app.run()

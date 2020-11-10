@@ -136,3 +136,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Ignore uwsgi .sock file
+flask_server.sock
