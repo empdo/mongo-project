@@ -1,7 +1,13 @@
 [Unit]
-Description=SSH key agent
+Description=uWSGI instance to serve mongo-project
 After=network.target
-WantedBy=multi-user.target
 
 [Service]
-ExecStart=/usr/bin/python3 /home/typeracer/dev/mongo-project/flask_server.py
+User=typeracer
+Group=nginx
+WorkingDirectory=/home/typeracer/dev/mongo-project
+ExecStart=/usr/bin/uwsgi --ini flask_server.ini
+
+
+[Install]
+WantedBy=multi-user.target
