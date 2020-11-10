@@ -7,7 +7,7 @@ import pprint
 
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017/')
 
-db = client['test']
+db = client['snippets-db']
 
 collection = db.snippets
 
