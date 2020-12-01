@@ -1,1 +1,2 @@
-def alvearenpotatis()
+def alvearenpotatis():
+    print('h')

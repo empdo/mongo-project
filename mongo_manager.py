@@ -3,14 +3,19 @@ import mongo_db
 from termcolor import colored
 import json
 
-content = []
+content_l = []
+content_s = ""
 
 
 def handel_snippet(path: str, lang: mongo_db.LanguageType):
     try:
         with open(path, 'r') as f:
             for line in f:
-                mongo_db.push_snippet(line.strip(), lang)
+                content_l.append(line)
+
+            content_s = "".join(content_l)
+            print(content_s)
+            mongo_db.push_snippet(content_s, lang)
 
             # spara det man senast pushade up för att kunna ta bort det
 
