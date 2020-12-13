@@ -62,9 +62,9 @@ def push_user_score(profilepic_url: str, username: str, time):
         l_collection.remove(user)
     
     content = {
-                "profile_pic": profilepic_url,
-                "username": username,
-                "time": time
+                "profile-pic": profilepic_url,
+                "user-name": username,
+                "cpm": time
             }
     l_collection.insert_one(content)
     l_collection.find().sort("time", pymongo.DESCENDING)
