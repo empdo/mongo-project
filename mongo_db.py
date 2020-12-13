@@ -8,8 +8,10 @@ import pprint
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017/')
 
 db = client['snippets-db']
+l_db = client['leaderboard-db']
 
 collection = db.snippets
+l_collection = db.leaderboard
 
 
 class LanguageType(Enum):
@@ -53,3 +55,19 @@ def list_snippets(language: Union[LanguageType, None, str]):
 
 def list_languages():
     return collection.distinct('language')
+
+def push_user_score(profilepic_url: str, username: str, time):
+    user = l_collection(find_one({'username': username}))
+    if user:
+        l_collection.remove(user)
+    
+    content = {
+                "profile_pic": profilepic_url,
+                "username": username,
+                "time": time
+            }
+    l_collection.insert_one(content)
+    l_collection.find().sort("time", pymongo.DESCENDING)
+
+def list_leaderboard():
+    return l_collection

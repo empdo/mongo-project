@@ -24,5 +24,9 @@ def get_snippets(lang: str = None):
 def get_langs():
     return Response(json.dumps(mongo_db.list_languages()), mimetype='application/json')
 
+@app.route('/leaderboard')
+def get_leaderboard():
+    return Response(json.dumps(mongo_db.list_leaderboard()), mimetype='application/json')
+
 if __name__ == "__main__":
     app.run()
