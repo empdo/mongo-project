@@ -29,4 +29,4 @@ def get_leaderboard():
     return Response(json.dumps(mongo_db.list_leaderboard()), mimetype='application/json')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host = "0.0.0.0")
