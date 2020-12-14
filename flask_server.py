@@ -28,5 +28,11 @@ def get_langs():
 def get_leaderboard():
     return Response(json.dumps(mongo_db.list_leaderboard()), mimetype='application/json')
 
+@app.route('/token/<code>')
+def get_token(code: str = None):
+    if not code:
+        return Response("Missing code", 401)
+    return "heelo"
+
 if __name__ == "__main__":
     app.run(host = "0.0.0.0")
