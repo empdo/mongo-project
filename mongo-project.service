@@ -7,6 +7,7 @@ User=typeracer
 Group=nginx
 WorkingDirectory=/home/typeracer/dev/mongo-project
 ExecStart=/usr/bin/uwsgi --ini flask_server.ini
+ExecStartPost=/bin/sh -c 'while ! /usr/bin/mongo --eval "db.version()" > /dev/null 2>&1; do sleep 0.1; done'
 
 
 [Install]
